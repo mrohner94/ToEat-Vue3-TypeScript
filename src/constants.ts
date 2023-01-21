@@ -1,9 +1,7 @@
 export const restaurantStatusList = [
-  'Want to Try',
-  'Recommended',
-  'Do Not Recommend'
-]
+  "Want to Try",
+  "Recommended",
+  "Do Not Recommend",
+] as const;
 
-export const dietList = [
-  'Vegetarian', 'Pescetarian', 'Keto', ''
-]
+export const dietList = ["Vegetarian", "Pescetarian", "Keto", ""];

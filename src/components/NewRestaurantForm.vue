@@ -1,18 +1,19 @@
-<script>
+<script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
+import { ref } from 'vue';
+import { restaurantStatusList } from '@/constants';
 
-export default {
-  emits: ['add-new-restaurant', 'cancel-new-restaurant'],
-  data: () => ({
-    newRestaurant: {
-      id: uuidv4(),
-      name: '',
-      address: '',
-      website: '',
-      status: 'Want to Try',
-    },
-  }),
-}
+defineEmits(['add-new-restaurant', 'cancel-new-restaurant'])
+
+const newRestaurant = ref({
+  id: uuidv4(),
+  name: '',
+  address: '',
+  website: '',
+  status: 'Want to Try',
+})
+
+
 </script>
 
 <template>
@@ -21,15 +22,8 @@ export default {
       <div class="field">
         <label for="name" class="label">Name</label>
         <div class="control">
-          <input
-            :value="newRestaurant.name"
-            @keyup.space="updateName"
-            type="text"
-            class="input is-large"
-            placeholder="Beignet and the Jets"
-            required
-            ref="elNameInput"
-          />
+          <input :value="newRestaurant.name" @keyup.space="updateName" type="text" class="input is-large"
+            placeholder="Beignet and the Jets" required ref="elNameInput" />
         </div>
       </div>
       <div class="field">
@@ -58,4 +52,6 @@ export default {
   </form>
 </template>
 
-<style></style>
+<style>
+
+</style>
