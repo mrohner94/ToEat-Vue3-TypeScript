@@ -4,4 +4,4 @@ export const restaurantStatusList = [
   "Do Not Recommend",
 ] as const;
 
-export const dietList = ["Vegetarian", "Pescetarian", "Keto", ""];
+export const dietList = ["Vegetarian", "Pescetarian", "Keto", ""] as const;

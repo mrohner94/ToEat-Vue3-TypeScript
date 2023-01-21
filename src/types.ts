@@ -1,4 +1,4 @@
-import type { restaurantStatusList } from "./constants";
+import type { dietList, restaurantStatusList } from "./constants";
 
 export type Dish = {
   id: string;
@@ -19,6 +19,7 @@ export type Restaurant = {
 // type Status = "Want to Try" | "Recommended" | "Do Not Recommend";
 
 type Status = typeof restaurantStatusList[number];
-type Diet = "Vegetarian" | "Pescetarian" | "Keto" | "";
+// type Diet = "Vegetarian" | "Pescetarian" | "Keto" | "";
+type Diet = typeof dietList[number];
 
 export default {};
