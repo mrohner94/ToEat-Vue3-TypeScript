@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Dish } from '@/types';
 
-defineEmits(['add-new-dish', 'cancel-new-dish'])
+// defineEmits(['add-new-dish', 'cancel-new-dish'])
+const emits = defineEmits<{
+  (e: 'add-new-dish', restaurant: Dish): void,
+  (e: 'cancel-new-dish'): void
+}>()
+
+const elNameInput = ref<HTMLInputElement | null>(null)
 
 const newDish = ref<Dish>({
   id: uuidv4(),
@@ -11,6 +17,19 @@ const newDish = ref<Dish>({
   status: 'Want to Try',
   diet: '',
 })
+
+const addDish = () => {
+  emits('add-new-dish', newDish.value)
+}
+
+const cancelNewDish = () => {
+  emits('cancel-new-dish')
+}
+
+onMounted(() => {
+  elNameInput.value?.focus()
+})
+
 </script>
 
 <template>
@@ -25,8 +44,8 @@ const newDish = ref<Dish>({
       </div>
       <div class="field">
         <div class="buttons">
-          <button @click="$emit('add-new-dish', newDish)" class="button is-success">Create</button>
-          <button @click="$emit('cancel-new-dish')" class="button is-light">Cancel</button>
+          <button @click="addDish" class="button is-success">Create</button>
+          <button @click="cancelNewDish" class="button is-light">Cancel</button>
         </div>
       </div>
     </div>
