@@ -2,10 +2,14 @@
 import { v4 as uuidv4 } from 'uuid'
 import { ref } from 'vue';
 import { restaurantStatusList } from '@/constants';
+import type { Restaurant } from '@/types';
 
-defineEmits(['add-new-restaurant', 'cancel-new-restaurant'])
+const emits = defineEmits<{
+  (e: 'add-new-restaurant', restaurant: Restaurant): void,
+  (e: 'cancel-new-restaurant'): void
+}>()
 
-const newRestaurant = ref({
+const newRestaurant = ref<Restaurant>({
   id: uuidv4(),
   name: '',
   address: '',
@@ -13,6 +17,13 @@ const newRestaurant = ref({
   status: 'Want to Try',
 })
 
+const addRestaurant = () => {
+  emits('add-new-restaurant', newRestaurant.value)
+}
+
+const cancelNewRestaurant = () => {
+  emits('cancel-new-restaurant')
+}
 
 </script>
 
@@ -44,8 +55,8 @@ const newRestaurant = ref({
       </div>
       <div class="field">
         <div class="buttons">
-          <button @click="$emit('add-new-restaurant', newRestaurant)" class="button is-success">Create</button>
-          <button @click="$emit('cancel-new-restaurant')" class="button is-light">Cancel</button>
+          <button @click="addRestaurant" class="button is-success">Create</button>
+          <button @click="cancelNewRestaurant" class="button is-light">Cancel</button>
         </div>
       </div>
     </div>
