@@ -10,7 +10,6 @@ const emits = defineEmits<{
 }>()
 
 const elNameInput = ref<HTMLInputElement | null>(null)
-
 const newRestaurant = ref<Restaurant>({
   id: uuidv4(),
   name: '',
@@ -27,6 +26,12 @@ const cancelNewRestaurant = () => {
   emits('cancel-new-restaurant')
 }
 
+const updateName = (e: InputEvent): void => {
+  if (e.data === ' ') {
+    newRestaurant.value.name = (e.target as HTMLInputElement).value
+  }
+}
+
 onMounted(() => {
   elNameInput.value?.focus()
 })
@@ -37,10 +42,10 @@ onMounted(() => {
   <form @submit.prevent>
     <div class="field">
       <div class="field">
-        <label for="name" class="label">Name</label>
+        <label for="name" class="label">Name: {{ newRestaurant.name }}</label>
         <div class="control">
-          <input v-model="newRestaurant.name" type="text" class="input is-large" p laceholder="Beignet and the Jets"
-            required ref="elNameInput" />
+          <input :value="newRestaurant.name" @input="(e) => updateName(e as InputEvent)" type="text"
+            class="input is-large" p laceholder="Beignet and the Jets" required ref="elNameInput" />
         </div>
       </div>
       <div class="field">

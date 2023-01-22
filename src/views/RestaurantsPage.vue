@@ -62,6 +62,10 @@ const hideForm = () => {
   showNewForm.value = false
 }
 
+const updateSearch = (e: KeyboardEvent) => {
+  filterText.value = (e.target as HTMLInputElement).value
+}
+
 onMounted(() => {
   const route = useRoute()
 
@@ -98,7 +102,8 @@ onMounted(() => {
             <div class="level-item is-hidden-tablet-only">
               <div class="field has-addons">
                 <p class="control">
-                  <input class="input" type="text" placeholder="Restaurant name" v-model="filterText" />
+                  <input :value="filterText" @keyup.enter="updateSearch" class="input" type="text"
+                    placeholder="Restaurant name" />
                 </p>
                 <p class="control">
                   <button class="button">Search</button>

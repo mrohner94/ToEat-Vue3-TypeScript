@@ -53,6 +53,11 @@ const deleteDish = (payload: Dish) => {
 const hideForm = () => {
   showNewForm.value = false
 }
+
+const updateSearch = (e: KeyboardEvent) => {
+  filterText.value = (e.target as HTMLInputElement).value
+}
+
 onMounted(() => {
   const route = useRoute()
   if (route.query.new) {
@@ -88,7 +93,8 @@ onMounted(() => {
             <div class="level-item is-hidden-tablet-only">
               <div class="field has-addons">
                 <p class="control">
-                  <input class="input" type="text" placeholder="Dish name" v-model="filterText" />
+                  <input class="input" type="text" placeholder="Dish name" :value="filterText"
+                    @keyup.enter="updateSearch" />
                 </p>
                 <p class="control">
                   <button class="button">Search</button>

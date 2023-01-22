@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Dish } from '@/types';
 
-// defineEmits(['add-new-dish', 'cancel-new-dish'])
 const emits = defineEmits<{
   (e: 'add-new-dish', restaurant: Dish): void,
   (e: 'cancel-new-dish'): void
